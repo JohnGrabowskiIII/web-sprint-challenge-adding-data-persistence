@@ -1,6 +1,5 @@
 
-const projects = "projects"
-const project_id = "project_id"
+const {projects, project_id} = require("../databaseConstants")
 
 exports.up = function(knex) {
   return knex.schema.createTable(projects, table => {
