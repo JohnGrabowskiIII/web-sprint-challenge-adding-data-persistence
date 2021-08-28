@@ -11,5 +11,6 @@ module.exports = {
     tasks: "tasks",
     task_id: "task_id",
     task_description: "task_description",
-    task_notes: "task_notes"
+    task_notes: "task_notes",
+    task_completed: "task_completed"
 }
