@@ -35,6 +35,8 @@ The project needs some additional NPM dependencies in order to work.
 
 ### Required Scripts
 
+<!-- Scripts built but not tested -->
+
 Add `"start"`. `"server"`, `"migrate"` and `"rollback"` scripts to the `package.json` file.
 
 ### Required Tables
