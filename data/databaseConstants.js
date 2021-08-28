@@ -6,5 +6,6 @@ module.exports = {
     project_completed: "project_completed",
     resources: "resources",
     resource_id: "resource_id",
-    resource_name: "resource_name"
+    resource_name: "resource_name",
+    resource_description: "resource_description"
 }
