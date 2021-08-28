@@ -4,8 +4,8 @@
   "main": "index.js",
   "scripts": {
     "test": "cross-env NODE_ENV=testing jest --watchAll --verbose --runInBand --silent",
-    "start": "npm run start",
-    "server": "npm run server",
+    "start": "node index.js",
+    "server": "nodemon index.js",
     "migrate": "npx knex migrate:latest",
     "rollback": "npx knex migrate:rollback"
   },
