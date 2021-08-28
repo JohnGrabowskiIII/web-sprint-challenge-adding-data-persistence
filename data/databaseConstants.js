@@ -10,5 +10,6 @@ module.exports = {
     resource_description: "resource_description",
     tasks: "tasks",
     task_id: "task_id",
-    task_description: "task_description"
+    task_description: "task_description",
+    task_notes: "task_notes"
 }
