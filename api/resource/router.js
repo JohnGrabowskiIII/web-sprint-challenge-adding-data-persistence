@@ -2,7 +2,7 @@
 
 const {isPostResourceBodyValid} = require('../middleware')
 
-const {postResource} = require('./model')
+const {postResource, getResource} = require('./model')
 
 const express = require('express')
 
@@ -17,12 +17,16 @@ router.post('/', isPostResourceBodyValid, async (req, res) => {
         res.status(500).json(err)
     }
     
-    
-    
 })
 
-router.get('/', (req, res) => {
-    res.status(200).json({message: "Get routes to /api/resources"})
+router.get('/', async (req, res) => {
+    try {
+        const resource = await getResource()
+        res.status(200).json(resource)
+    } catch (err) {
+        res.status(500).json(err)
+    }
+    
 })
 
 module.exports = router
