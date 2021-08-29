@@ -1,7 +1,7 @@
 
 const {getResource, getResourceByName} = require('./resource/model')
 
-const { resource_id } = require("../data/databaseConstants")
+const {getProjectByName} = require('./project/model')
 
 const isPostResourceBodyValid = (req, res, next) => {
 
@@ -35,7 +35,6 @@ const isResourceNameUnique = async (req, res, next) => {
 
     try {
         const resource = await getResourceByName(resource_name)
-        console.log(resource)
         if (resource) {
             next()
         } else {
@@ -47,8 +46,34 @@ const isResourceNameUnique = async (req, res, next) => {
 
 }
 
+const isPostProjectBodyValid = async (req, res, next) => {
+
+    const {project_name, project_completed} = req.body
+
+    const isNameValid = project_name && typeof project_name === 'string'
+
+    const isCompletedValid = project_completed === true || project_completed === false
+
+    const isValid = isNameValid && isCompletedValid
+
+    if (!isValid) res.status(400).json({message: "Post body is invalid"})
+
+    try {
+        const project = await getProjectByName(project_name)
+        if (project) {
+            next()
+        } else {
+            res.status(400).json({message: "project_name already in use"})
+        }
+    } catch(err) {
+        next(err)
+    }
+
+}
+
 module.exports = {
     isPostResourceBodyValid,
     findAllResources,
-    isResourceNameUnique
+    isResourceNameUnique,
+    isPostProjectBodyValid
 }
