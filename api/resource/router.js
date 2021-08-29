@@ -14,7 +14,7 @@ router.post('/', isPostResourceBodyValid, async (req, res) => {
         const post = await postResource(req.body)
         res.status(201).json(post)
     } catch(err) {
-        res.status(500).json(err)
+        next(err)
     }
     
 })
@@ -24,9 +24,16 @@ router.get('/', async (req, res) => {
         const resource = await getResource()
         res.status(200).json(resource)
     } catch (err) {
-        res.status(500).json(err)
+        next(err)
     }
     
+})
+
+router.use((err, req, res, next) => {
+    res.status(err.status || 500).json({
+        message: err.message,
+        stack: err.stack
+    })
 })
 
 module.exports = router
