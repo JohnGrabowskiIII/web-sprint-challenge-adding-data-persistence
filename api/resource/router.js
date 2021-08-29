@@ -1,6 +1,6 @@
 // build your `/api/resources` router here
 
-const {isPostResourceBodyValid} = require('../middleware')
+const {isPostResourceBodyValid, findAllResources} = require('../middleware')
 
 const {postResource, getResource} = require('./model')
 
@@ -12,20 +12,16 @@ router.post('/', isPostResourceBodyValid, async (req, res) => {
     
     try {
         const post = await postResource(req.body)
-        res.status(201).json(post)
+        res.status(201).json(post[0])
     } catch(err) {
         next(err)
     }
     
 })
 
-router.get('/', async (req, res) => {
-    try {
-        const resource = await getResource()
-        res.status(200).json(resource)
-    } catch (err) {
-        next(err)
-    }
+router.get('/', findAllResources, (req, res) => {
+
+    res.status(200).json(req.resource)
     
 })
 
