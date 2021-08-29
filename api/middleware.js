@@ -58,16 +58,7 @@ const isPostProjectBodyValid = async (req, res, next) => {
 
     if (!isValid) res.status(400).json({message: "Post body is invalid"})
 
-    try {
-        const project = await getProjectByName(project_name)
-        if (project) {
-            next()
-        } else {
-            res.status(400).json({message: "project_name already in use"})
-        }
-    } catch(err) {
-        next(err)
-    }
+    next()
 
 }
 

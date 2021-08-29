@@ -2,12 +2,30 @@
 
 const {isPostProjectBodyValid} = require('../middleware')
 
+const {postProject} = require('./model')
+
 const express = require('express')
 
 const router = express.Router()
 
-router.post('/', (req, res) => {
-    res.status(200).json({message: "Post routing to /api/projects working"})
+const convertCompletedIntToBool = completed => {
+    const body = completed[0]
+    return {...body,
+        project_completed: body.project_completed ?
+            true :
+            false}
+}
+
+router.post('/', isPostProjectBodyValid, async (req, res, next) => {
+    
+    try {
+        const post = await postProject(req.body)
+        const convertedPost = convertCompletedIntToBool(post)
+        res.status(201).json(convertedPost)
+    } catch(err) {
+        next(err)
+    }
+
 })
 
 router.use((err, req, res, next) => {

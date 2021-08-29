@@ -2,7 +2,7 @@
 
 const db = require('../../data/dbConfig')
 
-const {projects, resources, resource_id, resource_name, tasks} = require('../../data/databaseConstants')
+const {resources, resource_id, resource_name} = require('../../data/databaseConstants')
 
 const getResource = async (id) => {
     if (id) {

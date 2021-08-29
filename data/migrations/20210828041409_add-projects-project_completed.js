@@ -3,7 +3,7 @@ const {projects, project_completed} = require("../databaseConstants")
 
 exports.up = function(knex) {
   return knex.schema.table(projects, table => {
-      table.boolean(project_completed).notNullable().defaultsTo(0)
+      table.boolean(project_completed).notNullable().defaultsTo(false)
   })
 };
 
