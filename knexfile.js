@@ -9,6 +9,7 @@ const sharedConfig = {
 module.exports = {
   development: {
     ...sharedConfig,
+    // CHANGE FILENAME HERE
     connection: { filename: './data/lambda.db3' },
     seeds: { directory: './data/seeds' },
   },

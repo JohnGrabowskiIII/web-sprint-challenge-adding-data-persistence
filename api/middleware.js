@@ -1,7 +1,7 @@
 
 const {getResource, getResourceByName} = require('./resource/model')
 
-const {getProjectByName} = require('./project/model')
+const {getProject} = require('./project/model')
 
 const isPostResourceBodyValid = (req, res, next) => {
 
@@ -56,15 +56,30 @@ const isPostProjectBodyValid = async (req, res, next) => {
 
     const isValid = isNameValid && isCompletedValid
 
-    if (!isValid) res.status(400).json({message: "Post body is invalid"})
+    console.log(!isValid)
+
+    if (!isValid) {
+        res.status(400).json({message: "Post body is invalid"})
+    }
 
     next()
 
+}
+
+const findAllProjects = async (req, res, next) => {
+    try {
+        const project = await getProject()
+        req.project = project
+        next()
+    } catch (err) {
+        next(err)
+    }
 }
 
 module.exports = {
     isPostResourceBodyValid,
     findAllResources,
     isResourceNameUnique,
-    isPostProjectBodyValid
+    isPostProjectBodyValid,
+    findAllProjects
 }
