@@ -4,11 +4,12 @@ const db = require('../../data/dbConfig')
 
 const {tasks, task_id} = require('../../data/databaseConstants')
 
+// JOIN PROJECT NAME
 const getTask = async (id) => {
     if (id) {
         return db(tasks).where(task_id, id)
     } else {
-        return db(projects)
+        return db(tasks)
     }
 }
 
